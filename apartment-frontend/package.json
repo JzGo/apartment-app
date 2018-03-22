@@ -4,13 +4,16 @@
   "private": true,
   "dependencies": {
     "jwt-decode": "^2.2.0",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react": "15.6.1",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "15.6.1",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
+    "enzyme": "2.9.1",
     "jsonwebtoken": "^8.2.0",
-    "react-scripts": "1.1.1"
+    "react-scripts": "1.1.1",
+    "react-test-renderer": "15.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
