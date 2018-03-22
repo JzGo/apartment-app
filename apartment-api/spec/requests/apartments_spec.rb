@@ -7,16 +7,37 @@ describe "Apartments API" do
     Apartment.create(address_1: '123 where am i', city: 'someplace', postal_code: '12312', state: 'over here', country: 'where', contact_name: user.name, contact_phone: '123-123-1234',
     contact_hours: 'all the time', user_id: user.id)
 
-    # Make a request to the API
     get '/apartments'
 
-    # Convert the response into a Ruby Hash
     json = JSON.parse(response.body)
 
-    # Assure that we got a successful response
     expect(response).to be_success
 
-    # Assure that we got one result back as expected
     expect(json.length).to eq 1
+  end
+
+  it "creates an apartment" do
+
+    apartment_params = {
+      apartment: {
+        address_1: '123 where am i',
+        city: 'someplace',
+        postal_code: '12312',
+        state: 'over here',
+        country: 'where',
+        contact_name: user.name,
+        contact_phone: '123-123-1234',
+        contact_hours: 'all the time',
+        user_id: user.id
+      }
+    }
+
+    post '/apartments', params: apartment_params
+
+    expect(response).to be_success
+
+    new_apartment = Apartment.first
+
+    expect(new_apartment.address_1).to eq('123 where am i')
   end
 end
