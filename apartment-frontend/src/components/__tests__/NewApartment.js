@@ -52,3 +52,24 @@ it('has an contact_hours input', ()=>{
   const component = mount(<NewApartment />)
   expect(component.find('label#contact_hours').text()).toBe("Contact Hours")
 })
+
+it("calls submitHandler on submit", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler}/>)
+  component.find('button#submit').simulate('click', {button: 0})
+  expect(mockSubmitHandler.mock.calls.length).toBe(1)
+})
+
+it("passes values on submit", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler}/>)
+  component.find('input[name="address_1"]').simulate('change', {target: {value: '123 place', name: 'address_1'}})
+  component.find('input[name="city"]').simulate('change', {target: {value: 'sd', name: 'city'}})
+  component.find('button#submit').simulate('click', {button: 0})
+
+  const submittedValues = mockSubmitHandler.mock.calls[0][0]
+  console.log(submittedValues)
+
+  expect(submittedValues["address_1"]).toBe("123 place")
+  expect(submittedValues["city"]).toBe('sd')
+})

@@ -12,13 +12,17 @@ class App extends Component {
       this.props.history.replace('/login');
   }
 
+  newApartmentSubmit(apartment){
+    console.log("apartment listing submitted: ", apartment)
+  }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <h1 className="App-title">Post Apartment Listing</h1>
         </header>
-        <NewApartment />
+        <NewApartment onSubmit={this.newApartmentSubmit.bind(this)} />
        <p className="App-intro">
           <button type="button" className="form-submit" onClick={this.handleLogout.bind(this)}>Logout</button>
         </p>
