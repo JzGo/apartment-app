@@ -5,7 +5,9 @@ import {
   ControlLabel,
   FormGroup,
   FormControl,
-  Button
+  Button,
+  Alert,
+  HelpBlock
 } from 'react-bootstrap'
 
 class NewApartment extends Component {
@@ -36,12 +38,35 @@ class NewApartment extends Component {
     this.props.onSubmit(this.state.form)
   }
 
+  errorsFor(attribute){
+    var errorString = ""
+    if(this.props.errors && this.props.errors[attribute]){
+      const errors = this.props.errors[attribute]
+      if(errors){
+        errorString = errors.join(", ")
+      }
+    }
+    return errorString === "" ? null : errorString
+  }
+
   render() {
     return (
       <form>
         <Row>
           <Col xs={6}>
-            <FormGroup>
+            {this.props.errors &&
+              <Alert bsStyle="danger">
+                Please check the form and try again.
+              </Alert>
+            }
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={6}>
+            <FormGroup
+              id="address_1-form-group"
+              validationState={this.errorsFor('address_1') && 'error'}
+            >
               <ControlLabel id="address_1">Address 1</ControlLabel>
               <FormControl
                 type="text"
@@ -49,6 +74,9 @@ class NewApartment extends Component {
                 value={this.state.form.address_1}
                 onChange={this.handleChange.bind(this)}
                />
+             {this.errorsFor('address_1') &&
+                <HelpBlock id="name-help-block">{this.errorsFor('name')}</HelpBlock>
+              }
             </FormGroup>
           </Col>
         </Row>
@@ -119,7 +147,10 @@ class NewApartment extends Component {
         </Row>
         <Row>
           <Col xs={6}>
-            <FormGroup>
+            <FormGroup
+              id="contact_name-form-group"
+              validationState={this.errorsFor('contact_name') && 'error'}
+            >
               <ControlLabel id="contact_name">Contact Name</ControlLabel>
               <FormControl
                 type="text"
@@ -127,12 +158,18 @@ class NewApartment extends Component {
                 value={this.state.form.contact_name}
                 onChange={this.handleChange.bind(this)}
               />
+           {this.errorsFor('contact_name') &&
+              <HelpBlock id="name-help-block">{this.errorsFor('contact_name')}</HelpBlock>
+            }
             </FormGroup>
           </Col>
         </Row>
         <Row>
           <Col xs={6}>
-            <FormGroup>
+            <FormGroup
+              id="contact_phone-form-group"
+              validationState={this.errorsFor('contact_phone') && 'error'}
+            >
               <ControlLabel id="contact_phone">Contact Phone</ControlLabel>
               <FormControl
                 type="text"
@@ -140,12 +177,18 @@ class NewApartment extends Component {
                 value={this.state.form.contact_phone}
                 onChange={this.handleChange.bind(this)}
               />
+             {this.errorsFor('contact_phone') &&
+                <HelpBlock id="name-help-block">{this.errorsFor('name')}</HelpBlock>
+              }
             </FormGroup>
           </Col>
         </Row>
         <Row>
           <Col xs={6}>
-            <FormGroup>
+            <FormGroup
+              id="contact_hours-form-group"
+              validationState={this.errorsFor('contact_hours') && 'error'}
+            >
               <ControlLabel id="contact_hours">Contact Hours</ControlLabel>
               <FormControl
                 type="text"
@@ -153,6 +196,9 @@ class NewApartment extends Component {
                 value={this.state.form.contact_hours}
                 onChange={this.handleChange.bind(this)}
               />
+             {this.errorsFor('contact_phone') &&
+                <HelpBlock id="name-help-block">{this.errorsFor('name')}</HelpBlock>
+              }
             </FormGroup>
           </Col>
         </Row>

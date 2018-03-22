@@ -73,3 +73,55 @@ it("passes values on submit", ()=>{
   expect(submittedValues["address_1"]).toBe("123 place")
   expect(submittedValues["city"]).toBe('sd')
 })
+
+it("shows flash message when there is an error", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const validationErrors = [
+    {
+      param: 'name',
+      msg: 'Is required.'
+    }
+  ]
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler} errors={validationErrors}/>)
+  expect(component.find(".alert-danger").length).toBe(1)
+})
+
+it("highlights address_1 input when there is an error", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const validationErrors = {
+    address_1: ['Is required.']
+  }
+
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler} errors={validationErrors}/>)
+  expect(component.find('#address_1-form-group.has-error').length).toBe(1)
+})
+
+it("highlights contact_name input when there is an error", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const validationErrors = {
+    contact_name: ['Is required.']
+  }
+
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler} errors={validationErrors}/>)
+  expect(component.find('#contact_name-form-group.has-error').length).toBe(1)
+})
+
+it("highlights contact_phone input when there is an error", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const validationErrors = {
+    contact_phone: ['Is required.']
+  }
+
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler} errors={validationErrors}/>)
+  expect(component.find('#contact_phone-form-group.has-error').length).toBe(1)
+})
+
+it("highlights contact_hours input when there is an error", ()=>{
+  const mockSubmitHandler = jest.fn()
+  const validationErrors = {
+    contact_hours: ['Is required.']
+  }
+
+  const component = mount(<NewApartment onSubmit={mockSubmitHandler} errors={validationErrors}/>)
+  expect(component.find('#contact_hours-form-group.has-error').length).toBe(1)
+})
