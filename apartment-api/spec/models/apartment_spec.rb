@@ -1,5 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Apartment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user){ User.create name: 'Bob', email: 'bob@bobber.com', password: 'secret'}
+
+  it "should validate name" do
+    apartment = Apartment.create
+    expect(apartment.errors[:address_1]).to_not be_empty
+  end
 end
